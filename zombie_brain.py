@@ -30,7 +30,7 @@ brain = pygame.transform.scale(brain, (20, 20))
 wall = pygame.image.load("block_part/wall.png")
 wall = pygame.transform.scale(wall, (20, 20))
 
-# Definisci le dimensioni del serpente e della mela
+# Definisci le dimensioni dello zombie, del muro e del cervello
 zombie_size = 20
 brain_size = 20
 wall_size = 20
