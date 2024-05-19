@@ -55,7 +55,7 @@ walls = [(wall_x, wall_y)]
 # Inizializza il punteggio e la velocità e i cervelli presi
 score = 0
 speed = 8
-brain_taked = 0
+brain_taken = 0
 
 #funzione per generare il cervello
 def generate_brain_position():
@@ -151,15 +151,15 @@ while not game_over:
 
         walls.append((wall_x, wall_y))  # Aggiungi nuove coordinate del muro come tupla
 
-        brain_taked += 1
+        brain_taken += 1
 
-        if brain_taked < 10:
+        if brain_taken < 10:
             score += 5
-        elif brain_taked < 20:
+        elif brain_taken < 20:
             score += 15
-        elif brain_taked < 40:
+        elif brain_taken < 40:
             score += 40
-        elif brain_taked > 40:
+        elif brain_taken > 40:
             score += 50
 
     # Disegna il gioco
