@@ -116,16 +116,16 @@ while not game_over:
         if event.type == pygame.QUIT:
             game_over = True
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_a:
                 x_change = -zombie_size
                 y_change = 0
-            elif event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_d:
                 x_change = zombie_size
                 y_change = 0
-            elif event.key == pygame.K_UP:
+            elif event.key == pygame.K_w:
                 x_change = 0
                 y_change = -zombie_size
-            elif event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_s:
                 x_change = 0
                 y_change = zombie_size
 
