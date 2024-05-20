@@ -15,6 +15,8 @@ while not quit_game:
     best_try = best_score(score, best_try)
     # Inizializza Pygame
     pygame.init()
+    # Inizializza il mixer di pygame
+    pygame.mixer.init()
 
     # Imposta le dimensioni della finestra
     window_width = 800
@@ -28,7 +30,7 @@ while not quit_game:
     green = (0, 255, 0)
     red = (255, 0, 0)
 
-    # Carica le immagini
+    # Carica le immagini e i suoni
     zombie_head_up = pygame.image.load("assets/block_part/zombie_head_up.png")
     zombie_head_up = pygame.transform.scale(zombie_head_up, (20, 20))
     zombie_head_down = pygame.image.load("assets/block_part/zombie_head_down.png")
@@ -41,6 +43,10 @@ while not quit_game:
     brain = pygame.transform.scale(brain, (20, 20))
     wall = pygame.image.load("assets/block_part/wall.png")
     wall = pygame.transform.scale(wall, (20, 20))
+    eat_sound = pygame.mixer.Sound("assets/sounds/eating-sound-effect-36186.mp3")
+    eat_sound.set_volume(0.5)
+    crash_sound = pygame.mixer.Sound("assets/sounds/human-impact-on-ground-6982.mp3")
+    crash_sound.set_volume(0.5)
 
     # Definisci le dimensioni dello zombie, del muro e del cervello
     zombie_size = 20
@@ -156,16 +162,19 @@ while not quit_game:
 
         # Controlla le collisioni con i bordi della finestra
         if zombie_x < 0 or zombie_x >= window_width or zombie_y < 0 or zombie_y >= window_height:
+            crash_sound.play()
             game_over = True
 
         # Controlla le collisioni con il corpo dello zombie con il muro
         for wall_x, wall_y in walls:
             if zombie_x == wall_x and zombie_y == wall_y:
+                crash_sound.play()
                 game_over = True
                 break
 
         # Controlla se lo zombie ha mangiato il cervello e genera un muro random
         if zombie_x == brain_x and zombie_y == brain_y:
+            eat_sound.play()
             wall_x = random.randrange(wall_size, window_width - wall_size, wall_size)
             wall_y = random.randrange(wall_size, window_height - wall_size, wall_size)
             brain_x, brain_y = generate_brain_position()
