@@ -14,6 +14,7 @@ pygame.display.set_caption("Zombie Brains")
 # Definisci i colori
 black = (0, 0, 0)
 green = (0, 255, 0)
+red = (255, 0 ,0)
 
 
 # Carica le immagini
@@ -47,8 +48,13 @@ y_change = 0
 # Crea cervello e crea muro iniziale
 brain_x = random.randrange(brain_size, window_width - brain_size, brain_size)
 brain_y = random.randrange(brain_size, window_height - brain_size, brain_size)
-wall_x = random.randrange(wall_size, window_height - wall_size, wall_size)
+wall_x = random.randrange(wall_size, window_width - wall_size, wall_size)
 wall_y = random.randrange(wall_size, window_height - wall_size, wall_size)
+
+# Controlla se il muro è stato generato nella stessa posizione dello zombie
+while wall_x == zombie_x and wall_x == zombie_y:
+    wall_x = random.randrange(wall_size, window_width - wall_size, wall_size)
+    wall_y = random.randrange(wall_size, window_height - wall_size, wall_size)
 
 walls = [(wall_x, wall_y)]
 
@@ -56,6 +62,7 @@ walls = [(wall_x, wall_y)]
 score = 0
 speed = 8
 brain_taken = 0
+final_score = 0
 
 #funzione per generare il cervello
 def generate_brain_position():
@@ -100,10 +107,11 @@ def draw_game():
     pygame.display.update()
 
 
-# Inizializza il font per il punteggio
+# Inizializza il font per il punteggio e per il punteggio finale
 font_path = "assets/fonts/youmurdererbb_reg.ttf"
 font_size = 36
 font = pygame.font.Font(font_path, font_size)
+end_font = pygame.font.Font(font_path, 50)
 
 # Inizializza il clock di Pygame
 clock = pygame.time.Clock()
@@ -162,11 +170,35 @@ while not game_over:
         elif brain_taken > 40:
             score += 50
 
+        final_score = score
     # Disegna il gioco
     draw_game()
 
     # Regola la velocità del gioco
     clock.tick(speed)
+
+# Schermata di punteggio finale
+close_game = False
+while not close_game:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            close_game = True
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN:
+                close_game = True
+
+    text_score = end_font.render("Final Score: " + str(final_score), True, (red))
+    text_quit = end_font.render("Press Return to Quit", True, (red))
+
+    # Ricrea la schemata di gioco per poi metterci il punteggio
+    window.fill(black)
+    window.blit(brain, (brain_x, brain_y))
+    for wall_x, wall_y in walls:
+        window.blit(wall, (wall_x, wall_y))
+
+    window.blit(text_score, (window_width // 2, window_height // 2))
+    window.blit(text_quit, (window_width // 2, window_height //2 + 60))
+    pygame.display.update()
 
 # Quit Pygame
 pygame.quit()
