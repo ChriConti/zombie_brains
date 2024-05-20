@@ -17,17 +17,17 @@ green = (0, 255, 0)
 
 
 # Carica le immagini
-zombie_head_up = pygame.image.load("block_part/zombie_head_up.png")
+zombie_head_up = pygame.image.load("assets/block_part/zombie_head_up.png")
 zombie_head_up = pygame.transform.scale(zombie_head_up, (20, 20))
-zombie_head_down = pygame.image.load("block_part/zombie_head_down.png")
+zombie_head_down = pygame.image.load("assets/block_part/zombie_head_down.png")
 zombie_head_down = pygame.transform.scale(zombie_head_down, (20, 20))
-zombie_head_left = pygame.image.load("block_part/zombie_head_left.png")
+zombie_head_left = pygame.image.load("assets/block_part/zombie_head_left.png")
 zombie_head_left = pygame.transform.scale(zombie_head_left, (20, 20))
-zombie_head_right = pygame.image.load("block_part/zombie_head_right.png")
+zombie_head_right = pygame.image.load("assets/block_part/zombie_head_right.png")
 zombie_head_right = pygame.transform.scale(zombie_head_right, (20, 20))
-brain = pygame.image.load("block_part/brain.png")
+brain = pygame.image.load("assets/block_part/brain.png")
 brain = pygame.transform.scale(brain, (20, 20))
-wall = pygame.image.load("block_part/wall.png")
+wall = pygame.image.load("assets/block_part/wall.png")
 wall = pygame.transform.scale(wall, (20, 20))
 
 # Definisci le dimensioni dello zombie, del muro e del cervello
@@ -101,7 +101,7 @@ def draw_game():
 
 
 # Inizializza il font per il punteggio
-font_path = "fonts/youmurdererbb_reg.ttf"
+font_path = "assets/fonts/youmurdererbb_reg.ttf"
 font_size = 36
 font = pygame.font.Font(font_path, font_size)
 
